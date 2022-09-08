@@ -2,10 +2,10 @@
 
 ## MyReads is a web application to manage your books and categories it to three shelves
 
-Markup : * Shelves
-* Currently Reading
-* Want To Read
-* read
+* Shelves
+    * Currently Reading
+    * Want To Read
+    * read
 
 
 ## you can change the book state from shelf to another
@@ -15,24 +15,24 @@ Markup : * Shelves
 
 
 ## technologies used in this project
-Markup : * Technologies
-* ReactJs
-* bootstrap
-* react-icons
-* react-router-dom
-* reactstrap
+* Technologies
+    * ReactJs
+    * bootstrap
+    * react-icons
+    * react-router-dom
+    * reactstrap
 
 ## technologies used in this project
-Markup : * Project Structure
-* public
-    * index.js
-* src
-    * components
-        * all components files
-    * app.jsx
-    * BooksAPI.js
-    * index.css
-    * index.js
-* package-lock.json
-* package.json
-* README.md
+* Project Structure
+    * public
+        * index.js
+    * src
+        * components
+            * all components files
+        * app.jsx
+        * BooksAPI.js
+        * index.css
+        * index.js
+    * package-lock.json
+    * package.json
+    * README.md
