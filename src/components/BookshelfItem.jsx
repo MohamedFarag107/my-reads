@@ -1,7 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import {
-    Button,
     Card,
     CardBody,
     CardSubtitle,
@@ -11,8 +9,7 @@ import {
 } from "reactstrap";
 
 function BookshelfItem({ book, handleChange }) {
-    const [value, setValue] = useState(book.shelf);
-    const navigate = useNavigate();
+    const [value, setValue] = useState(book.shelf || "none");
     const handleOptions = (e) => {
         handleChange(e, book.id);
         setValue(e.target.value);
@@ -37,13 +34,14 @@ function BookshelfItem({ book, handleChange }) {
                         </CardText>
                     </div>
                     <div>
-                        <Button
-                            onClick={() => navigate(`select/${book.id}`)}
-                            color="primary"
-                            className="w-100 my-2"
-                        >
-                            Details
-                        </Button>
+                    <p className="m-0 mt-3">authors</p>
+                    <ul className="mb-3">
+                        {book.authors && book.authors.map((author, index) => (
+                            <li key={index}>{author}</li>
+                        ))}
+                    </ul>
+                    </div>
+                    <div>
                         <Input
                             className="mb-3"
                             type="select"
