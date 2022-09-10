@@ -35,9 +35,8 @@ npm start or yarn start
 ## Built the project with
 
 ```
-
 npm build
-``
+```
 
 you can use google firebase for free deploying (https://firebase.google.com/docs/hosting)
 
