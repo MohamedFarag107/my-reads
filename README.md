@@ -26,7 +26,8 @@ run the following command
 
 ```
 npm start or yarn start
-``
+```
+
 
 
 ## Deployment
