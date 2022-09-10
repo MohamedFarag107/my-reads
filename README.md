@@ -8,9 +8,10 @@
 
 ## you can change the book state from shelf to another
 ## you can search for a book
-
 ## you can remove a book from the shelf or change the shelf
 
+## npm start => run project
+## npm build => build project
 
 ## technologies used in this project
 * ReactJs
