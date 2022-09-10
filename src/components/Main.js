@@ -2,21 +2,27 @@ import React from "react";
 import Nav from "./Nav";
 import Section from "./Section";
 
-function Main({ results, currentlyReading, wantToRead, read }) {
+function Main({ books,updateBookShelf }) {
     return (
         <>
             <Nav />
             <Section
-                results={results}
-                books={currentlyReading}
+                books={books.filter(
+                    (book) => book.shelf === "currentlyReading"
+                )}
+                updateBookShelf={updateBookShelf}
                 shelf="currently Reading"
             />
             <Section
-                results={results}
-                books={wantToRead}
+                updateBookShelf={updateBookShelf}
+                books={books.filter((book) => book.shelf === "wantToRead")}
                 shelf="want To Read"
             />
-            <Section results={results} books={read} shelf="read" />
+            <Section
+                updateBookShelf={updateBookShelf}
+                books={books.filter((book) => book.shelf === "read")}
+                shelf="read"
+            />
         </>
     );
 }

@@ -6,15 +6,15 @@ import { TiArrowBackOutline } from "react-icons/ti";
 import Loading from "./Loading";
 import { useNavigate } from "react-router-dom";
 
-function Search({ myBooks, searchUpdate }) {
+function Search({ myBooks, updateBookShelf }) {
     const navigate = useNavigate();
     const [searchBook, setSearchBook] = useState("");
     const [loading, setLoading] = useState(false);
     const [books, setBooks] = useState([]);
-    const handleChange = async (value, id) => {
+    const handleChange = async (book) => {
         setLoading(true);
-        await update(id, value).then(() => {
-            searchUpdate({ id, shelf: value });
+        await update(book.id, book.shelf).then(() => {
+            updateBookShelf(book);
             setLoading(false);
         });
     };
@@ -62,18 +62,7 @@ function Search({ myBooks, searchUpdate }) {
                     .map((book) => (
                         <BookshelfItem
                             key={book.id}
-                            book={
-                                myBooks["wantToRead"].find(
-                                    (el) => el.id === book.id
-                                ) ||
-                                myBooks["read"].find(
-                                    (el) => el.id === book.id
-                                ) ||
-                                myBooks["currentlyReading"].find(
-                                    (el) => el.id === book.id
-                                ) ||
-                                book
-                            }
+                            book={myBooks.find((b) => b.id === book.id) || book}
                             loading={loading}
                             handleChange={handleChange}
                         />

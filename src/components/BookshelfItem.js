@@ -11,7 +11,7 @@ import {
 function BookshelfItem({ book, handleChange }) {
     const [value, setValue] = useState(book.shelf || "none");
     const handleOptions = (e) => {
-        handleChange(e.target.value, book.id);
+        handleChange({ ...book, shelf: e.target.value });
         setValue(e.target.value);
     };
     return (
@@ -34,12 +34,13 @@ function BookshelfItem({ book, handleChange }) {
                         </CardText>
                     </div>
                     <div>
-                    <p className="m-0 mt-3">authors</p>
-                    <ul className="mb-3">
-                        {book.authors && book.authors.map((author, index) => (
-                            <li key={index}>{author}</li>
-                        ))}
-                    </ul>
+                        <p className="m-0 mt-3">authors</p>
+                        <ul className="mb-3">
+                            {book.authors &&
+                                book.authors.map((author, index) => (
+                                    <li key={index}>{author}</li>
+                                ))}
+                        </ul>
                     </div>
                     <div>
                         <Input
@@ -48,9 +49,7 @@ function BookshelfItem({ book, handleChange }) {
                             value={value}
                             onChange={handleOptions}
                         >
-                            <option disabled>
-                                Move to...
-                            </option>
+                            <option disabled>Move to...</option>
                             <option value="currentlyReading">
                                 Currently Reading
                             </option>

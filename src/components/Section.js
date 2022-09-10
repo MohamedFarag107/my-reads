@@ -3,12 +3,12 @@ import { update } from "../BooksAPI";
 import Bookshelf from "./Bookshelf";
 import Loading from "./Loading";
 
-function Section({ books, shelf, results }) {
+function Section({ books, shelf, updateBookShelf }) {
     const [loading, setLoading] = useState(false);
-    const handleChange = async (shelf_, id) => {
+    const handleChange = async (book) => {
         setLoading(true);
-        await update(id, shelf_).then((res) => {
-            results({ res, id, shelf: shelf_, prevShelf: shelf.split(" ").join("") });
+        await update(book.id, book.shelf).then((res) => {
+            updateBookShelf(book);
             setLoading(false);
         });
     };

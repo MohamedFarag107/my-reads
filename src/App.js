@@ -8,11 +8,7 @@ import Search from "./components/Search";
 
 function App() {
     const [showScroll, setShowScroll] = useState(false);
-    const [books, setBooks] = useState({
-        currentlyReading: [],
-        wantToRead: [],
-        read: [],
-    });
+    const [books, setBooks] = useState([]);
 
     useEffect(() => {
         const handleScroll = (event) => {
@@ -32,64 +28,24 @@ function App() {
     useEffect(() => {
         const all = async () => {
             const data = await getAll();
-            const formattedData = {
-                currentlyReading: [],
-                wantToRead: [],
-                read: [],
-            };
-            formattedData["currentlyReading"] = data.filter(
-                (book) => book.shelf === "currentlyReading"
-            );
-            formattedData["wantToRead"] = data.filter(
-                (book) => book.shelf === "wantToRead"
-            );
-            formattedData["read"] = data.filter(
-                (book) => book.shelf === "read"
-            );
-            setBooks(formattedData);
+            setBooks(data);
         };
         all();
     }, []);
 
-    const results = (res) => {
-        const { shelf, id, prevShelf } = res;
-        // remove from prev shelf
-        const temp = books;
-        const index = temp[prevShelf].findIndex((book) => book.id === id);
-        const book = temp[prevShelf].splice(index, 1)[0];
-        // update shelf
-        book.shelf = shelf;
-        // add to new shelf
-        temp[shelf].push(book);
 
-        setBooks({ ...temp });
-    };
-
-    const searchUpdate = (a) => {
-        const { id, shelf } = a;
-        
-    };
+    const updateBookShelf = (book) =>{
+        setBooks([...books.filter((b) => b.id !== book.id), book])
+    }
 
     return (
         <div className="app">
             <Routes>
                 <Route
                     path="/"
-                    element={
-                        <Main
-                            currentlyReading={books["currentlyReading"]}
-                            read={books["read"]}
-                            wantToRead={books["wantToRead"]}
-                            results={results}
-                        />
-                    }
+                    element={<Main updateBookShelf={updateBookShelf} books={books} />}
                 />
-                <Route
-                    path="/search"
-                    element={
-                        <Search searchUpdate={searchUpdate} myBooks={books} />
-                    }
-                />
+                <Route path="/search" element={<Search myBooks={books} updateBookShelf={updateBookShelf} />} />
                 <Route path="*" element={<Page404 />} />
             </Routes>
 
